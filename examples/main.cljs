@@ -2,14 +2,8 @@
   (:require cljs-crypto-rand :as r))
 
 (defn log-str 
-  ([x]
-    (do
-      (.log js/console (pr-str x))
-      x))
-  ([m x]
-    (do 
-      (log-str {:msg m :data x})
-      x)))
+  ([x]   (do (.log js/console (pr-str x)) x))
+  ([m x] (do (log-str {:msg m :data x})   x)))
 
 (log-str (r/safe-rand-int))
 (log-str (r/rand-u8))

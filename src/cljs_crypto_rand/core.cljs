@@ -3,8 +3,8 @@
 (def have-crypto? js/window.crypto)
 
 ;; make native arrays sequable
-;; should this be elseewhere?
-;; need conditional compilation - because of extending requires type to exist
+;; should this be elsewhere?
+;; need conditional - because of extending requires the type to exist
 ;; assume if have crypto then have native arrays
 (if have-crypto?
   (extend-protocol ISeqable 
