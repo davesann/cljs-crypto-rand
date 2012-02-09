@@ -4,7 +4,7 @@
 
 ;; make native arrays sequable
 ;; should this be elseewhere?
-;; need conditional compilation - because of extending
+;; need conditional compilation - because of extending requires type to exist
 ;; assume if have crypto then have native arrays
 (if have-crypto?
   (extend-protocol ISeqable 
@@ -68,6 +68,7 @@
    will use window.crypto if available  
    for consistency, 
      - max random int is 4294967296 = 2**32 (unsigned 32 bit int)
+     - min int is 0
   "
   ([]  (if have-crypto? (rand-u32) (rand-int pow2-32)))
   ([n] 
@@ -75,36 +76,6 @@
     (let [r32 (safe-rand-int)]
       (.round js/Math (* n (/ r32 pow2-32))))))
 
-(defn log-str 
-  ([x]
-    (do
-      (.log js/console (pr-str x))
-      x))
-  ([m x]
-    (do 
-      (log-str {:msg m :data x})
-      x)))
-
-(log-str (safe-rand-int))
-
-(log-str (rand-u8))
-(log-str (rand-u8 4))
-(log-str (vec (rand-u8 4)) )
-(log-str (rand-u16))
-(log-str (rand-u16 4))
-(log-str (vec(rand-u16 4)))
-(log-str (rand-u32))
-(log-str (rand-u32 4))
-(log-str (vec (rand-u32 4)))
-(log-str (rand-8))
-(log-str (rand-8 4))
-(log-str (vec (rand-8 4)))
-(log-str (rand-16))
-(log-str (rand-16 4))
-(log-str (vec (rand-16 4)))
-(log-str (rand-32))
-(log-str (rand-32 4))
-(log-str (vec (rand-32 4)))
 
 
 
